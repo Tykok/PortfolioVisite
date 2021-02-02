@@ -2,7 +2,6 @@ package classIP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -10,9 +9,11 @@ import java.util.ArrayList;
 
 public class IP {
 
-	private String ip;
-	private String dateHeure;
-	private String page;
+	protected String ip;
+	protected String dateHeure;
+	protected String page;
+	protected static int nbTotalIP = 0;
+	protected static ArrayList<IP> collectionIP = new ArrayList<IP>();
 
 	/**
 	 * Constructeur de la classe IP permettant d'instancier une ligne en référence à
@@ -22,23 +23,48 @@ public class IP {
 	 * @param dateHeure
 	 * @param page
 	 */
-	public IP(String ip, String dateHeure, String page) {
+	protected IP(String ip, String dateHeure, String page) {
 		this.ip = ip;
 		this.dateHeure = dateHeure;
 		this.page = page;
+		collectionIP.add(this);
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Information sur l'adresse IP : \n");
-		sb.append("IP :");
-		sb.append(ip);
-		sb.append("\nDate et heure de visite : ");
-		sb.append(dateHeure);
-		sb.append("\nPage visitée : ");
-		sb.append(page);
-		return sb.toString();
+	/**
+	 * Méthode qui retourne une collection d'objet IP contenant les IP identiques à
+	 * celle recherchés
+	 * 
+	 * @param IPRecherche
+	 * @return
+	 */
+	protected static ArrayList<IP> trouverIP(String IPRecherche) {
+		ArrayList<IP> collectionReturn = new ArrayList<IP>();
+		for (IP a : collectionIP) {
+			if (a.ip.equals(IPRecherche)) {
+				collectionReturn.add(a);
+			}
+		}
+		return collectionReturn;
+	}
+
+	// TODO protected static void recupererLocal(String nameFile);
+	// TODO protected static void ecraserLocal(String nameFile);
+	
+	/**
+	 * Méthode qui retourne une collection d'objet IP contenant les pages visités
+	 * identiques à celle recherchés
+	 * 
+	 * @param PageRecherche
+	 * @return
+	 */
+	protected static ArrayList<IP> trouverPage(String PageRecherche) {
+		ArrayList<IP> collectionReturn = new ArrayList<IP>();
+		for (IP a : collectionIP) {
+			if (a.page.equals(PageRecherche)) {
+				collectionReturn.add(a);
+			}
+		}
+		return collectionReturn;
 	}
 
 	/**
@@ -50,7 +76,7 @@ public class IP {
 	 * @return
 	 * @throws ExceptionPersonnalise
 	 */
-	public static IP decoupeChaine(String a) throws ExceptionPersonnalise {
+	protected static IP decoupeChaine(String a) throws ExceptionPersonnalise {
 		IP returnIP = null;
 		if (a.contains(";")) {
 			String ip = a.substring(0, a.indexOf(" ", 0));
@@ -69,7 +95,7 @@ public class IP {
 	 * 
 	 * @return
 	 */
-	public static ArrayList<IP> returnCollectionIP() {
+	protected static ArrayList<IP> returnCollectionIP() {
 		ArrayList<IP> collection = new ArrayList<IP>();
 		String host = "http://treportelie.fr/historic.txt";
 		URL aURL = null;
