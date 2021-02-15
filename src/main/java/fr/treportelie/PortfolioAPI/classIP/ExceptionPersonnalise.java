@@ -1,4 +1,4 @@
-package classIP;
+package fr.treportelie.PortfolioAPI.classIP;
 
 public class ExceptionPersonnalise extends Exception {
 

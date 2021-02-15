@@ -1,4 +1,4 @@
-package classIP;
+package fr.treportelie.PortfolioAPI.classIP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,6 +50,46 @@ public class IP {
 	// TODO protected static void recupererLocal(String nameFile);
 	// TODO protected static void ecraserLocal(String nameFile);
 	
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getDateHeure() {
+		return dateHeure;
+	}
+
+	public void setDateHeure(String dateHeure) {
+		this.dateHeure = dateHeure;
+	}
+
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
+	}
+
+	public static int getNbTotalIP() {
+		return nbTotalIP;
+	}
+
+	public static void setNbTotalIP(int nbTotalIP) {
+		IP.nbTotalIP = nbTotalIP;
+	}
+
+	public static ArrayList<IP> getCollectionIP() {
+		return collectionIP;
+	}
+
+	public static void setCollectionIP(ArrayList<IP> collectionIP) {
+		IP.collectionIP = collectionIP;
+	}
+
 	/**
 	 * Méthode qui retourne une collection d'objet IP contenant les pages visités
 	 * identiques à celle recherchés
@@ -95,7 +135,7 @@ public class IP {
 	 * 
 	 * @return
 	 */
-	protected static ArrayList<IP> returnCollectionIP() {
+	public static ArrayList<IP> returnCollectionIP() {
 		ArrayList<IP> collection = new ArrayList<IP>();
 		String host = "http://treportelie.fr/historic.txt";
 		URL aURL = null;

@@ -1,4 +1,4 @@
-package classIP;
+package fr.treportelie.PortfolioAPI.classIP;
 
 import java.util.ArrayList;
 
@@ -22,6 +22,7 @@ public class MainIP extends IP {
 	public String getPage() {
 		return this.page;
 	}
+	
 
 	@Override
 	public String toString() {
